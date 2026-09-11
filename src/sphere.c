@@ -40,7 +40,7 @@ bool sphere_hit(sphere sphere, ray r, interval ray_t, hitRecord *record)
     set_face_normal(record, r, outward_normal);
     record->mat = sphere.mat;
 
-    record->normal = sub_vec3(record->p, sphere.center);
-    record->normal = div_double_vec3(record->normal, sphere.radius);
+    // record->normal = sub_vec3(record->p, sphere.center);
+    // record->normal = div_double_vec3(record->normal, sphere.radius);
     return true;
 }

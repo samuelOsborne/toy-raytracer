@@ -9,11 +9,12 @@
 
 int main(int ac, char **av)
 {
-    material *ground = construct_material(0, construct_vec3(0.8, 0.8, 0.0));
-    material *center = construct_material(0, construct_vec3(0.1, 0.2, 0.5));
+    material *ground = construct_material(0, construct_vec3(0.8, 0.8, 0.0), 0.0, 0);
+    material *center = construct_material(0, construct_vec3(0.1, 0.2, 0.5), 0.0, 0);
 
-    material *left = construct_material(1, construct_vec3(0.8, 0.8, 0.8));
-    material *right = construct_material(1, construct_vec3(0.8, 0.6, 0.2));
+    material *left = construct_material(2, construct_vec3(0.8, 0.8, 0.8), 0.3, 1.50);
+    material *bubble_mat = construct_material(2, construct_vec3(0.8, 0.8, 0.8), 0.3, 1.00 / 1.50);
+    material *right = construct_material(1, construct_vec3(0.8, 0.6, 0.2), 1.0, 0);
 
     sphere *record_a = malloc(sizeof(sphere));
     record_a->center = construct_vec3(0, 0, -1);
@@ -30,6 +31,11 @@ int main(int ac, char **av)
     record_c->radius = 0.5;
     record_c->mat = left;
 
+    sphere *bubble = malloc(sizeof(sphere));
+    bubble->center = construct_vec3(-1.0, 0.0, -1.0);
+    bubble->radius = 0.4;
+    bubble->mat = bubble_mat;
+
     sphere *record_d = malloc(sizeof(sphere));
     record_d->center = construct_vec3(1, 0, -1);
     record_d->radius = 0.5;
@@ -38,6 +44,7 @@ int main(int ac, char **av)
     hittableList *world = construct_list(record_b);
     add_sphere(world, record_a);
     add_sphere(world, record_c);
+    add_sphere(world, bubble);
     add_sphere(world, record_d);
 
     print_records(world);

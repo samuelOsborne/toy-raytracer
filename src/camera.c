@@ -90,6 +90,7 @@ void render(camera camera, FILE *output_file, hittableList *world)
 {
     for (int j = 0; j < camera.image_height; j++)
     {
+        printf("Rendered line : %i\n", j);
         for (int i = 0; i < camera.image_width; i++)
         {
             vec3 pixel_color = construct_vec3(0, 0, 0);
@@ -98,16 +99,6 @@ void render(camera camera, FILE *output_file, hittableList *world)
                 ray r = get_ray(camera, i, j);
                 pixel_color = add_vec3(pixel_color, ray_color(r, camera.max_depth, world));
             }
-            // vec3 pixel_center = camera.pixel00_loc;
-            // vec3 i_delta_u = mult_double_vec3(camera.pixel_delta_u, i);
-            // vec3 j_delta_v = mult_double_vec3(camera.pixel_delta_v, j);
-            // pixel_center = add_vec3(pixel_center, i_delta_u);
-            // pixel_center = add_vec3(pixel_center, j_delta_v);
-
-            // vec3 ray_direction = sub_vec3(pixel_center, camera.center);
-            // ray r = construct_ray(camera.center, ray_direction);
-
-            // vec3 pixel_color = ray_color(r, world);
             pixel_color = mult_double_vec3(pixel_color, camera.pixel_samples_scale);
             write_color_to_file(output_file, pixel_color);
         }

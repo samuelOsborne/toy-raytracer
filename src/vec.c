@@ -166,8 +166,13 @@ vec3 reflect(vec3 v, vec3 n)
 {
     vec3 tmp_dot = mult_double_vec3(n, dot_prod_vec3(v, n) * 2);
 
-    // vec3 tmp_dot = mult_double_vec3(n, dot_prod_vec3(v, n));
-    // tmp_dot = mult_double_vec3(tmp_dot, 2);
+    return sub_vec3(v, tmp_dot);
+}
 
-    return sub_vec3(v,tmp_dot);
+vec3 refract(vec3 uv, vec3 n, double etai_over_etat)
+{
+    double cos_theta = fmin(dot_prod_vec3(mult_double_vec3(uv, -1), n), 1.0);
+    vec3 r_out_perp = mult_double_vec3(add_vec3(uv, mult_double_vec3(n, cos_theta)), etai_over_etat);
+    vec3 r_out_parallel = mult_double_vec3(n, -sqrt(fabs(1.0 - length_squared(r_out_perp))));
+    return add_vec3(r_out_perp, r_out_parallel);
 }

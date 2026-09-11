@@ -29,6 +29,7 @@ vec3 random_clamped_vec3(double min, double max);
 vec3 random_unit_vector();
 vec3 random_on_hemisphere(vec3 normal);
 vec3 reflect(vec3 v, vec3 n);
+vec3 refract(vec3 uv, vec3 n, double etai_over_etat);
 bool near_zero(vec3 vec);
 
 #endif
