@@ -1,12 +1,19 @@
-#ifndef MATERIAL_H
-#define MATERIAL_H
+#ifndef material_H
+#define material_H
 
+#include "vec.h"
+#include "hit_record.h"
 #include "ray.h"
-#include "vec3.h"
+
+struct hitRecord;
 
 typedef struct material
 {
-    bool scatter(ray r, hit_record *rec, vec3 attenuation, ray scattered);
+    int code;
+    vec3 albedo;
 } material;
+
+material *construct_material(int code, vec3 albedo);
+bool scatter(material lam, ray r_in, struct hitRecord *rc, vec3 *attenuation, ray *scattered);
 
 #endif

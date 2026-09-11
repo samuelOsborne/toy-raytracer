@@ -2,12 +2,13 @@
 #include "sphere.h"
 #include "interval.h"
 
-sphere construct_sphere(vec3 center, double radius)
+sphere construct_sphere(vec3 center, double radius, material *mat)
 {
     sphere sphere;
 
     sphere.center = center;
     sphere.radius = fmax(0, radius);
+    sphere.mat = mat;
 
     return sphere;
 }
@@ -37,6 +38,7 @@ bool sphere_hit(sphere sphere, ray r, interval ray_t, hitRecord *record)
     vec3 outward_normal = (sub_vec3(record->p, sphere.center));
     outward_normal = div_double_vec3(outward_normal, sphere.radius);
     set_face_normal(record, r, outward_normal);
+    record->mat = sphere.mat;
 
     record->normal = sub_vec3(record->p, sphere.center);
     record->normal = div_double_vec3(record->normal, sphere.radius);

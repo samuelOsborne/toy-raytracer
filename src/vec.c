@@ -154,3 +154,20 @@ vec3 random_on_hemisphere(vec3 normal)
         return mult_double_vec3(on_unit_sphere, -1.0);
     }
 }
+
+bool near_zero(vec3 vec)
+{
+    double s = 1e-8;
+
+    return (fabs(vec.x) < s && fabs(vec.y) < s && fabs(vec.z) < s);
+}
+
+vec3 reflect(vec3 v, vec3 n)
+{
+    vec3 tmp_dot = mult_double_vec3(n, dot_prod_vec3(v, n) * 2);
+
+    // vec3 tmp_dot = mult_double_vec3(n, dot_prod_vec3(v, n));
+    // tmp_dot = mult_double_vec3(tmp_dot, 2);
+
+    return sub_vec3(v,tmp_dot);
+}

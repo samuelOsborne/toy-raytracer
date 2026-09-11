@@ -67,8 +67,12 @@ vec3 ray_color(ray r, int depth, hittableList *world)
 
     if (list_hit(world, r, construct_interval(0.001, INFINITY), &rec))
     {
-        vec3 direction = add_vec3(rec.normal, random_unit_vector());
-        return mult_double_vec3(ray_color(construct_ray(rec.p, direction), depth - 1, world), 0.5);
+        ray scattered;
+        vec3 attenuation;
+
+        if (scatter(*rec.mat, r, &rec, &attenuation, &scattered))
+            return mult_vec3(ray_color(scattered, depth - 1, world), attenuation);
+        return construct_vec3(0, 0, 0);
     }
 
     vec3 unit_dir = unit_vec3(r.dir);

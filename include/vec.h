@@ -1,6 +1,8 @@
 #ifndef VEC_H
 #define VEC_H
 
+#include <stdbool.h>
+
 typedef struct vec3
 {
     double x;
@@ -26,5 +28,7 @@ vec3 random_vec3();
 vec3 random_clamped_vec3(double min, double max);
 vec3 random_unit_vector();
 vec3 random_on_hemisphere(vec3 normal);
+vec3 reflect(vec3 v, vec3 n);
+bool near_zero(vec3 vec);
 
 #endif

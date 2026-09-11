@@ -6,11 +6,13 @@
 #include "ray.h"
 #include "material.h"
 
+struct material;
+
 typedef struct hitRecord
 {
     vec3 p;
     vec3 normal;
-    material *mat;
+    struct material *mat;
     double t;
     bool front_face;
 } hitRecord;
