@@ -1,0 +1,24 @@
+Step 1: (up to blue background)
+- create output file format (ppm is cool to write text values)
+- vec3 class
+- big chunk of time setting up camera
+- then add rays = blue gradient
+- add a sphere with the formula
+- got stuck on not having a centered sphere (leftover width/height clash)
+
+step 2:
+- calculated normals of hit location
+- added hittable_record
+- started linked list of hit record
+- finished hittable_list
+
+step 3:
+- refactoring to camera done
+- moving on to aliasing
+
+
+friday:
+
+- aliasing
+- diffuse
+- starting metal
