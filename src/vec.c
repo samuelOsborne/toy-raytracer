@@ -103,7 +103,7 @@ double dot_prod_vec3(vec3 a, vec3 b)
 
 vec3 cross_vec3(vec3 a, vec3 b)
 {
-    return construct_vec3(a.y * b.z - a.z * b.y, a.z * b.x - a.x * b.z, a.x * b.y - b.y * a.x);
+    return construct_vec3(a.y * b.z - a.z * b.y, a.z * b.x - a.x * b.z, a.x * b.y - a.y * b.x);
 }
 
 double length_squared(vec3 a)
@@ -152,6 +152,18 @@ vec3 random_on_hemisphere(vec3 normal)
     else
     {
         return mult_double_vec3(on_unit_sphere, -1.0);
+    }
+}
+
+vec3 random_in_unit_disk()
+{
+    while (true)
+    {
+        vec3 p = construct_vec3(random_double_capped(-1, 1), random_double_capped(-1, 1), 0);
+        if (length_squared(p) < 1)
+        {
+            return p;
+        }
     }
 }
 
